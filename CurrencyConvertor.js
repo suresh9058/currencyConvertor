@@ -9,6 +9,10 @@ function convertor(i) {
     var params = "base="+baseCurrencyText+"&symbols="+targetCurrencyText;
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
+        if(Math.sign(document.getElementsByName('convert')[i].value) == -1) {
+            document.getElementsByName('convertor')[i].value = "";
+            break;
+        }
         if(baseCurrencyText != targetCurrencyText) {
             var obj = JSON.parse(this.responseText);
             document.getElementsByName('convertor')[i].value = obj.rates[targetCurrencyText] * document.getElementsByName('convert')[i].value;
