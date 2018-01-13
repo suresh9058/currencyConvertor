@@ -1,112 +1,71 @@
 <html
 	<head>
-	<style>
-		.container-border {
-			border-style: groove;
-			width: 400px;
-			display: inline-block;
-			margin-left: 15px;
-			margin-top: 10px;
-		}
-		.disclaimer {
-			
-		}
-	</style>
+			<link rel="stylesheet" type="text/css" href="./CurrencyConvertor.scss"></link>
 	</head>
 	<body>
-	<div style="width: 100%; display: table;">
+	<div class="parent-container">
 	<div class="container-border">
 		Currency Convertor<br>
 		<div> <p>Type in amount and select currency:</p>
-		<input type="number" id="convert" placeholder="0.00" onchange="convertor()">
-		<select id="base_currency" onchange="convertor()">
+		<input type="number" name="convert" placeholder="0.00" onkeypress="convertor(0)">
+		<select name="base_currency" onchange="convertor(0)">
 		  <option>CAD</option>
 		  <option>USD</option>
 		  <option>EUR</option>
 		</select><br>
 		</div>
 		<div> <p>Converted amount:</p>
-		<input type="number" id="convertor" placeholder="0.00">
-		<select id="target_currency">
+		<input type="number" name="convertor" placeholder="0.00">
+		<select name="target_currency">
 		  <option>USD</option>
 		  <option>EUR</option>
 		  <option>CAD</option>
 		</select><br>
 		</div>
-		<div class="disclaimer"><a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a></div>
+		<a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a>
 	</div>	
 	<div class="container-border">
 		Currency Convertor<br>
 		<div> <p>Type in amount and select currency:</p>
-		<input type="number" id="convert" placeholder="0.00" onchange="convertor()">
-		<select id="base_currency" onchange="convertor()">
+		<input type="number" name="convert" placeholder="0.00" onkeypress="convertor(1)">
+		<select name="base_currency" onchange="convertor(1)">
 		  <option>CAD</option>
 		  <option>USD</option>
 		  <option>EUR</option>
 		</select><br>
 		</div>
 		<div> <p>Converted amount:</p>
-		<input type="number" id="convertor" placeholder="0.00">
-		<select id="target_currency">
+		<input type="number" name="convertor" placeholder="0.00">
+		<select name="target_currency">
 		  <option>USD</option>
 		  <option>EUR</option>
 		  <option>CAD</option>
 		</select><br>
 		</div>
-		<div class="disclaimer"><a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a></div>
+		<a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a>
 	</div>	
 	<div class="container-border">
 		Currency Convertor<br>
 		<div> <p>Type in amount and select currency:</p>
-		<input type="number" id="convert" placeholder="0.00" onchange="convertor()">
-		<select id="base_currency" onchange="convertor()">
+		<input type="number" name="convert" placeholder="0.00" onkeypress="convertor(2)">
+		<select name="base_currency" onchange="convertor(2)">
 		  <option>CAD</option>
 		  <option>USD</option>
 		  <option>EUR</option>
 		</select><br>
 		</div>
 		<div> <p>Converted amount:</p>
-		<input type="number" id="convertor" placeholder="0.00">
-		<select id="target_currency">
+		<input type="number" name="convertor" placeholder="0.00">
+		<select name="target_currency">
 		  <option>USD</option>
 		  <option>EUR</option>
 		  <option>CAD</option>
 		</select><br>
 		</div>
-		<div class="disclaimer"><a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a></div>
+		<a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a>
 	</div>	
 	</div>
 	</body>
-	<script>
-		//get data from json and calculate the result with that data
-		function convertor() {
-			 var xhttp = new XMLHttpRequest();
-			 var baseCurrency = document.getElementById("base_currency");
-				var baseCurrencyText = baseCurrency.options[baseCurrency.selectedIndex].text;
-				console.log("baseCurrencyText::"+baseCurrencyText);
-				var targetCurrency = document.getElementById("target_currency");
-				var targetCurrencyText = targetCurrency.options[targetCurrency.selectedIndex].text;
-				console.log("targetCurrencyText::"+targetCurrencyText);
-				
-				var url = "https://api.fixer.io/latest";
-				var params = "base="+baseCurrencyText+"&symbols="+targetCurrencyText;
-				console.log("parameters value::"+params);
-			  xhttp.onreadystatechange = function() {
-			   if (this.readyState == 4 && this.status == 200) {
-					if(baseCurrencyText != targetCurrencyText) {
-						console.log("response::"+this.responseText);
-						var obj = JSON.parse(this.responseText);
-						console.log("response obj::"+obj.rates[targetCurrencyText]);
-						document.getElementById('convertor').value = obj.rates[targetCurrencyText+""] * document.getElementById('convert').value;
-						debugger;
-					}
-					else {
-						document.getElementById('convertor').value = document.getElementById('convert').value;
-					}
-				} 
-			  }
-			  xhttp.open("GET", url+"?"+params, true);
-			  xhttp.send();
-		}
+	<script type="text/javascript" src="./CurrencyConvertor.js">
 	</script>
 </html>

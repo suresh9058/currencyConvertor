@@ -1,0 +1,18 @@
+.container-border {
+    border-style: groove;
+    width: 400px;
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.parent-container {
+    width: 100%;
+    display: table;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
