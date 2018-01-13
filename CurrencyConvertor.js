@@ -16,6 +16,9 @@ function convertor(i) {
             document.getElementsByName('convertor')[i].value = document.getElementsByName('convert')[i].value;
         }
     } 
+    else if(this.readyState == 4 && this.status != 200){
+        alert("OOPS! Something Went Wrong");
+    }
     }
     xhttp.open("GET", url+"?"+params, true);
     xhttp.send();
