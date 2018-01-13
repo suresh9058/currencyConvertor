@@ -1,0 +1,66 @@
+<html
+	<head>
+	<style>
+		.container-border {
+			border-style: groove;
+			width: 400px;
+		}
+		.disclaimer {
+			
+		}
+	</style>
+	</head>
+	<body>
+	<div class="container-border">
+		Currency Convertor<br>
+		<div> <p>Type in amount and select currency:</p>
+		<input type="text" id="convert" placeholder="0.00" onblur="convertor()">
+		<select id="base_currency" onblur="dropDownChange()">
+		  <option>CAD</option>
+		  <option>USD</option>
+		  <option>EUR</option>
+		</select><br>
+		</div>
+		<div> <p>Converted amount:</p>
+		<input type="text" id="convertor" placeholder="0.00" onblur="convertor()">
+		<select id="target_currency" onblur="dropDownChange()">
+		  <option>USD</option>
+		  <option>EUR</option>
+		  <option>CAD</option>
+		</select><br>
+		</div>
+		<div class="disclaimer"><a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank">Disclaimer</a></div>
+	</div>	
+	</body>
+	<script>
+		//get data from json and calculate the result with that data
+		function convertor(){
+			 var xhttp = new XMLHttpRequest();
+			 var baseCurrency = document.getElementById("base_currency");
+				var baseCurrencyText = baseCurrency.options[baseCurrency.selectedIndex].text;
+				console.log("baseCurrencyText::"+baseCurrencyText);
+				var targetCurrency = document.getElementById("target_currency");
+				var targetCurrencyText = targetCurrency.options[targetCurrency.selectedIndex].text;
+				console.log("targetCurrencyText::"+targetCurrencyText);
+				
+				var url = "https://api.fixer.io/latest";
+				var params = "base="+baseCurrencyText+"&symbols="+targetCurrencyText;
+				console.log("parameters value::"+params);
+			  xhttp.onreadystatechange = function() {
+			   if (this.readyState == 4 && this.status == 200) {
+				console.log("response::"+this.responseText);
+				var obj = JSON.parse(this.responseText);
+				console.log("response obj::"+obj.rates[targetCurrencyText]);
+				document.getElementById('convertor').value = obj.rates[targetCurrencyText+""] * document.getElementById('convert').value;
+				debugger;
+				};
+			  }
+			  xhttp.open("GET", url+"?"+params, true);
+			  xhttp.send();
+		}
+		
+		function dropDownChange() {
+			console.log("drop down changed");
+		}
+	</script>
+</html>
